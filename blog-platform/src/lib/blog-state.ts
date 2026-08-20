@@ -1,8 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { authors, categories, posts as initialPosts, tags } from "@/lib/data";
-import type { Author, Category, Post, Tag } from "@/lib/types";
+import type { Post } from "@/lib/types";
 
 const STORAGE_KEY = "northstar-journal-state-v1";
 
@@ -226,11 +224,7 @@ export function moderateItem(state: BlogState, itemId: string, decision: "approv
 }
 
 export function useBlogState() {
-  const [state, setState] = useState<BlogState>(loadBlogState);
-
-  useEffect(() => {
-    setState(loadBlogState());
-  }, []);
+  const [state, setState] = useState<BlogState>(() => loadBlogState());
 
   const updateState = (updater: BlogState | ((current: BlogState) => BlogState)) => {
     setState((current) => {

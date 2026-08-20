@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { loadBlogState } from "@/lib/blog-state";
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState(() => loadBlogState().notifications);
-
-  useEffect(() => {
-    setNotifications(loadBlogState().notifications);
-  }, []);
+  const [notifications] = useState(() => loadBlogState().notifications);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">

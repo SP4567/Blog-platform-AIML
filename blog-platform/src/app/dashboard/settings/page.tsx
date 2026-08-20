@@ -1,39 +1,251 @@
-import type { Metadata } from "next";
-import { createMetadata } from "@/lib/seo";
+"use client";
+
+import { useState } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuth, type AuthUser } from "@/lib/auth";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 
-export const metadata: Metadata = createMetadata("Settings", "Manage profile information, account security, and notification preferences.");
+function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: Partial<AuthUser>) => void }) {
+  const [name, setName] = useState(user.name ?? "");
+  const [bio, setBio] = useState(user.bio ?? "");
+  const [location, setLocation] = useState(user.location ?? "");
+  const [website, setWebsite] = useState(user.website ?? "");
+  const [image, setImage] = useState(user.image ?? "");
+  const [profileStatus, setProfileStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [profileMsg, setProfileMsg] = useState("");
+
+  const handleProfileSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setProfileStatus("loading");
+    setProfileMsg("");
+
+    try {
+      const res = await fetch("/api/user/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          bio: bio.trim(),
+          location: location.trim(),
+          website: website.trim() || null,
+          image: image.trim() || null,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setProfileStatus("error");
+        setProfileMsg(data.error ?? "Failed to update profile.");
+        return;
+      }
+
+      updateUser(data.profile);
+      setProfileStatus("success");
+      setProfileMsg("Profile updated successfully.");
+    } catch {
+      setProfileStatus("error");
+      setProfileMsg("Network error while saving profile.");
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Author Profile</CardTitle>
+        <CardDescription>Manage your public persona, bio, and social links.</CardDescription>
+      </CardHeader>
+      <form onSubmit={handleProfileSave} className="space-y-4 p-6 pt-0">
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Display Name</label>
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. Mina Chen"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Bio</label>
+          <textarea
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            placeholder="Tell readers about your work, background, and focus areas"
+            rows={3}
+            className="w-full rounded-2xl border border-slate-200 p-3 text-sm text-slate-800 outline-none focus:border-slate-400"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Location</label>
+          <Input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="e.g. San Francisco, USA"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Personal Website / Portfolio</label>
+          <Input
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            placeholder="https://yourportfolio.dev"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Avatar Image URL</label>
+          <Input
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            placeholder="https://images.unsplash.com/photo-..."
+          />
+        </div>
+
+        {profileMsg ? (
+          <div className={`flex items-center gap-2 text-sm p-3 rounded-2xl ${
+            profileStatus === "success" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-rose-50 text-rose-700 border border-rose-200"
+          }`}>
+            {profileStatus === "success" ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+            <span>{profileMsg}</span>
+          </div>
+        ) : null}
+
+        <Button type="submit" disabled={profileStatus === "loading"} className="rounded-full">
+          {profileStatus === "loading" ? "Saving profile…" : "Save profile"}
+        </Button>
+      </form>
+    </Card>
+  );
+}
+
+function PasswordForm() {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [secStatus, setSecStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [secMsg, setSecMsg] = useState("");
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSecStatus("loading");
+    setSecMsg("");
+
+    if (newPassword !== confirmPassword) {
+      setSecStatus("error");
+      setSecMsg("New passwords do not match.");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      setSecStatus("error");
+      setSecMsg("New password must be at least 6 characters.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/user/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setSecStatus("error");
+        setSecMsg(data.error ?? "Failed to change password.");
+        return;
+      }
+
+      setSecStatus("success");
+      setSecMsg("Password changed successfully.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch {
+      setSecStatus("error");
+      setSecMsg("Network error while updating password.");
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Security & Password</CardTitle>
+        <CardDescription>Update your password to keep your account safe.</CardDescription>
+      </CardHeader>
+      <form onSubmit={handlePasswordChange} className="space-y-4 p-6 pt-0">
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Current Password</label>
+          <Input
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder="Enter current password"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">New Password</label>
+          <Input
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="Min 6 characters"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Confirm New Password</label>
+          <Input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Repeat new password"
+            required
+          />
+        </div>
+
+        {secMsg ? (
+          <div className={`flex items-center gap-2 text-sm p-3 rounded-2xl ${
+            secStatus === "success" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-rose-50 text-rose-700 border border-rose-200"
+          }`}>
+            {secStatus === "success" ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+            <span>{secMsg}</span>
+          </div>
+        ) : null}
+
+        <Button type="submit" disabled={secStatus === "loading"} className="rounded-full">
+          {secStatus === "loading" ? "Updating password…" : "Update password"}
+        </Button>
+      </form>
+    </Card>
+  );
+}
 
 export default function SettingsPage() {
+  const { user, updateUser } = useAuth();
+
   return (
-    <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Optimize your author profile for discoverability.</CardDescription>
-          </CardHeader>
-          <div className="grid gap-4">
-            <Input placeholder="Display name" />
-            <Input placeholder="Bio" />
-            <Input placeholder="Location" />
-            <Button className="rounded-full">Save profile</Button>
-          </div>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Security</CardTitle>
-            <CardDescription>Manage password, 2FA, and session controls.</CardDescription>
-          </CardHeader>
-          <div className="grid gap-4">
-            <Input placeholder="New password" type="password" />
-            <Input placeholder="Confirm password" type="password" />
-            <Button className="rounded-full">Update security</Button>
-          </div>
-        </Card>
+    <ProtectedRoute>
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div className="mb-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Account</p>
+          <h1 className="mt-1 text-3xl font-bold text-slate-950">Settings & Preferences</h1>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          {user ? (
+            <ProfileForm key={user.id} user={user} updateUser={updateUser} />
+          ) : (
+            <Card><p className="p-6 text-sm text-slate-500">Loading user profile…</p></Card>
+          )}
+          <PasswordForm />
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+npm ci
+npx prisma generate
+npx prisma migrate deploy

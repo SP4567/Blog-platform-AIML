@@ -2,13 +2,16 @@ export type Role = "visitor" | "registered_user" | "author" | "editor" | "modera
 
 export interface Author {
   id: string;
-  name: string;
-  handle: string;
+  name: string | null;
+  email?: string;
+  handle?: string;
   role: Role;
-  avatar: string;
-  bio: string;
-  followers: number;
-  location: string;
+  avatar?: string | null;
+  image?: string | null;
+  bio?: string | null;
+  followers?: number;
+  location?: string | null;
+  website?: string | null;
 }
 
 export interface Category {
@@ -17,16 +20,36 @@ export interface Category {
   slug: string;
   description: string;
   color: string;
+  _count?: {
+    posts: number;
+  };
 }
 
 export interface Tag {
   id: string;
   name: string;
   slug: string;
-  posts: number;
+  posts?: number;
+  _count?: {
+    posts: number;
+  };
 }
 
 export type PostStatus = "draft" | "published" | "scheduled";
+
+export interface CommentItem {
+  id: string;
+  body: string;
+  createdAt: string | Date;
+  authorId: string;
+  postId: string;
+  author: {
+    id: string;
+    name: string | null;
+    image?: string | null;
+    role: string;
+  };
+}
 
 export interface Post {
   id: string;
@@ -34,20 +57,41 @@ export interface Post {
   title: string;
   excerpt: string;
   content: string;
-  publishedAt: string;
+  status: PostStatus;
+  publishedAt: string | Date;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
   readTime: string;
+  featured: boolean;
+  featuredOrder: number;
+  image: string | null;
+  views: number;
+  likes?: number;
+  bookmarks?: number;
+  comments?: number;
+  authorId?: string;
+  categoryId?: string;
   author: Author;
   category: Category;
   tags: Tag[];
-  featured: boolean;
-  image: string;
-  views: number;
-  likes: number;
-  comments: number;
-  featuredOrder: number;
-  status?: PostStatus;
+  commentsList?: CommentItem[];
+  _count?: {
+    commentsList: number;
+    likedBy: number;
+    bookmarkedBy: number;
+  };
+  isLiked?: boolean;
+  isBookmarked?: boolean;
 }
 
 export interface NewsletterSignup {
   email: string;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string | Date;
 }

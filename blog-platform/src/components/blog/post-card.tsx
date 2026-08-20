@@ -1,24 +1,50 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Post } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { formatNumber } from "@/lib/utils";
+import { Eye, Heart, MessageSquare } from "lucide-react";
 
 export function PostCard({ post }: { post: Post }) {
+  const fallbackImage = "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80";
+  const imageUrl = post.image || fallbackImage;
+
   return (
-    <article className="group overflow-hidden rounded-[32px] border border-slate-200/80 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-      <img src={post.image} alt={post.title} className="h-48 w-full object-cover" />
-      <div className="p-6">
+    <article className="group flex flex-col overflow-hidden rounded-[32px] border border-slate-200/80 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+      <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+        <Image
+          src={imageUrl}
+          alt={post.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition duration-300 group-hover:scale-105"
+        />
+        {post.featured ? (
+          <span className="absolute left-4 top-4 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+            Featured
+          </span>
+        ) : null}
+      </div>
+      <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2">
-          <Badge>{post.category.name}</Badge>
-          <span className="text-sm text-slate-500">{post.readTime}</span>
+          {post.category ? (
+            <Link href={`/category/${post.category.slug}`}>
+              <Badge className="cursor-pointer hover:bg-slate-200 transition">{post.category.name}</Badge>
+            </Link>
+          ) : null}
+          <span className="text-xs text-slate-500">{post.readTime}</span>
         </div>
-        <Link href={`/post/${post.slug}`} className="mt-4 block text-xl font-semibold text-slate-950 transition group-hover:text-slate-700">
+        <Link href={`/post/${post.slug}`} className="mt-3 block text-xl font-semibold text-slate-950 transition group-hover:text-slate-700">
           {post.title}
         </Link>
-        <p className="mt-3 text-sm leading-7 text-slate-600">{post.excerpt}</p>
-        <div className="mt-5 flex items-center justify-between text-sm text-slate-500">
-          <span>{post.author.name}</span>
-          <span>{formatNumber(post.views)} views</span>
+        <p className="mt-2.5 line-clamp-2 text-sm leading-6 text-slate-600">{post.excerpt}</p>
+        <div className="mt-auto pt-6 flex items-center justify-between text-xs text-slate-500 border-t border-slate-100">
+          <span className="font-medium text-slate-700">{post.author?.name ?? "Author"}</span>
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1"><Eye className="h-3.5 w-3.5 text-slate-400" /> {formatNumber(post.views ?? 0)}</span>
+            <span className="flex items-center gap-1"><Heart className="h-3.5 w-3.5 text-rose-400" /> {formatNumber(post.likes ?? 0)}</span>
+            <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5 text-slate-400" /> {formatNumber(post.comments ?? 0)}</span>
+          </div>
         </div>
       </div>
     </article>
