@@ -73,12 +73,18 @@ export default function PostManagerPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Dashboard</p>
             <h1 className="mt-1 text-3xl font-bold text-slate-950">Manage Stories</h1>
           </div>
-          <Button asChild className="rounded-full gap-2">
-            <Link href="/dashboard/posts/new" className="text-white">
-              <PenSquare className="h-4 w-4" />
-              <span>New story</span>
-            </Link>
-          </Button>
+          <Button
+              asChild
+              className="rounded-full gap-3 bg-slate-950 px-5 py-6 text-sm font-medium text-white hover:bg-slate-900"
+            >
+              <Link
+                href="/dashboard/posts/new"
+                className="flex items-center gap-2 text-white"
+              >
+                <PenSquare className="h-4 w-4 shrink-0" />
+                <span>New story</span>
+              </Link>
+            </Button>
         </div>
 
         {/* Status Filter Tabs */}
@@ -119,33 +125,72 @@ export default function PostManagerPage() {
             <div className="grid gap-6 md:grid-cols-2">
               {filteredPosts.map((post) => (
                 <Card key={post.id} className="flex flex-col justify-between">
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
-                        post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
-                      }`}>
-                        {post.status}
-                      </span>
-                      <span className="text-xs text-slate-400">{post.readTime}</span>
-                    </div>
-                    <CardTitle className="text-lg line-clamp-1">{post.title}</CardTitle>
-                    <CardDescription className="line-clamp-2">{post.excerpt}</CardDescription>
-                  </CardHeader>
-                  <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
-                    <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div>
+                    <CardHeader className="space-y-2 mb-3">
+                      {/* Status + read time */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex min-w-0 items-center gap-2">
+                          <span
+                            className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
+                              post.status === "published"
+                                ? "bg-emerald-100 text-emerald-700"
+                                : "bg-amber-100 text-amber-700"
+                            }`}
+                          >
+                            {post.status}
+                          </span>
+
+                          <span className="shrink-0 whitespace-nowrap text-xs text-slate-400">
+                            {post.readTime}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <CardTitle className="min-w-0 line-clamp-1 text-lg">
+                        {post.title}
+                      </CardTitle>
+
+                      {/* Excerpt */}
+                      <CardDescription className="line-clamp-2">
+                        {post.excerpt}
+                      </CardDescription>
+                    </CardHeader>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-slate-100 pt-4 text-xs text-slate-500">
+                    <div className="flex items-center gap-4">
                       <span>{post.views} views</span>
                       <span>{post.likes ?? 0} likes</span>
                       <span>{post.comments ?? 0} comments</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button asChild variant="outline" size="sm" className="rounded-full h-8 px-3">
-                        <Link href={`/post/${post.slug}`} target="_blank">
-                          <Eye className="h-3.5 w-3.5 mr-1" /> View
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="h-8 rounded-full px-3"
+                      >
+                        <Link
+                          href={`/post/${post.slug}`}
+                          target="_blank"
+                          className="flex items-center gap-1 whitespace-nowrap"
+                        >
+                          <Eye className="h-3.5 w-3.5 shrink-0" />
+                          <span>View</span>
                         </Link>
                       </Button>
-                      <Button asChild size="sm" className="rounded-full h-8 px-3">
-                        <Link href={`/dashboard/posts/${post.id}/edit`}>
-                          <Edit3 className="h-3.5 w-3.5 mr-1" /> Edit
+
+                      <Button
+                        asChild
+                        size="sm"
+                        className="h-8 rounded-full px-3"
+                      >
+                        <Link
+                          href={`/dashboard/posts/${post.id}/edit`}
+                          className="flex items-center gap-1 whitespace-nowrap"
+                        >
+                          <Edit3 className="h-3.5 w-3.5 shrink-0" />
+                          <span>Edit</span>
                         </Link>
                       </Button>
                       <Button

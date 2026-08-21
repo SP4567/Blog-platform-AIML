@@ -57,7 +57,7 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
         <CardTitle>Author Profile</CardTitle>
         <CardDescription>Manage your public persona, bio, and social links.</CardDescription>
       </CardHeader>
-      <form onSubmit={handleProfileSave} className="space-y-4 p-6 pt-0">
+      <form onSubmit={handleProfileSave} className="space-y-4 pt-1">
         <div>
           <label className="block text-xs font-semibold text-slate-600 mb-1">Display Name</label>
           <Input
@@ -177,7 +177,7 @@ function PasswordForm() {
         <CardTitle>Security & Password</CardTitle>
         <CardDescription>Update your password to keep your account safe.</CardDescription>
       </CardHeader>
-      <form onSubmit={handlePasswordChange} className="space-y-4 p-6 pt-0">
+      <form onSubmit={handlePasswordChange} className="space-y-4 pt-1">
         <div>
           <label className="block text-xs font-semibold text-slate-600 mb-1">Current Password</label>
           <Input

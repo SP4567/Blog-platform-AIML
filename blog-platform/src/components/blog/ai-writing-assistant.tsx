@@ -173,7 +173,7 @@ export function AIWritingAssistant({
               <h3 className="font-semibold text-slate-900 text-sm">Northstar Editorial AI</h3>
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-800">
                 <ShieldCheck className="h-3 w-3" />
-                100% Private • Guardrails Active
+                AI Active
               </span>
             </div>
             <p className="text-xs text-slate-500">

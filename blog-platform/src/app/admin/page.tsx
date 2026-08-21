@@ -193,41 +193,41 @@ export default function AdminPage() {
               <div className="space-y-8">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                   <Card>
-                    <CardHeader className="pb-2">
+                    <CardHeader className="pb-1">
                       <CardDescription>Total Stories</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalPosts}</CardTitle>
                     </CardHeader>
-                    <div className="px-6 pb-4 text-xs text-slate-500">
+                    <div className="text-xs text-slate-500 pt-1">
                       {stats.publishedPosts} published • {stats.draftPosts} drafts
                     </div>
                   </Card>
 
                   <Card>
-                    <CardHeader className="pb-2">
+                    <CardHeader className="pb-1">
                       <CardDescription>Total Users</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalUsers}</CardTitle>
                     </CardHeader>
-                    <div className="px-6 pb-4 text-xs text-slate-500">
+                    <div className="text-xs text-slate-500 pt-1">
                       Registered authors & readers
                     </div>
                   </Card>
 
                   <Card>
-                    <CardHeader className="pb-2">
+                    <CardHeader className="pb-1">
                       <CardDescription>Cumulative Views</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalViews.toLocaleString()}</CardTitle>
                     </CardHeader>
-                    <div className="px-6 pb-4 text-xs text-slate-500">
+                    <div className="text-xs text-slate-500 pt-1">
                       Reader impressions across site
                     </div>
                   </Card>
 
                   <Card>
-                    <CardHeader className="pb-2">
+                    <CardHeader className="pb-1">
                       <CardDescription>Engagement</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalComments}</CardTitle>
                     </CardHeader>
-                    <div className="px-6 pb-4 text-xs text-slate-500">
+                    <div className="text-xs text-slate-500 pt-1">
                       {stats.totalSubscribers} newsletter subscribers
                     </div>
                   </Card>
@@ -239,7 +239,7 @@ export default function AdminPage() {
                       <CardTitle>Recent User Signups</CardTitle>
                       <CardDescription>Latest accounts registered on the platform.</CardDescription>
                     </CardHeader>
-                    <div className="p-6 pt-0 space-y-3">
+                    <div className="space-y-3 pt-1">
                       {users.slice(0, 5).map((u) => (
                         <div key={u.id} className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-sm">
                           <div>
@@ -259,7 +259,7 @@ export default function AdminPage() {
                       <CardTitle>System & Operations Health</CardTitle>
                       <CardDescription>Database connection and runtime status.</CardDescription>
                     </CardHeader>
-                    <div className="p-6 pt-0 space-y-3">
+                    <div className="space-y-3 pt-1">
                       <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 text-sm">
                         <span className="font-medium text-slate-700">Database Engine</span>
                         <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
