@@ -2,7 +2,7 @@ import { useState } from "react";
 import { authors, categories, posts as initialPosts, tags } from "@/lib/data";
 import type { Post } from "@/lib/types";
 
-const STORAGE_KEY = "northstar-journal-state-v1";
+const STORAGE_KEY = "the-perceptron-state-v1";
 
 export interface BlogProfile {
   name: string;
@@ -66,11 +66,11 @@ function buildDefaultState(): BlogState {
     comments,
     bookmarks: [posts[0].id],
     profile: {
-      name: "Northstar Editor",
-      email: "editor@northstar-journal.dev",
+      name: "Perceptron Editor",
+      email: "editor@theperceptron.dev",
       bio: "Designing polished publishing systems for ambitious teams.",
       location: "Seattle, USA",
-      website: "https://northstarjournal.dev",
+      website: "https://theperceptron.dev",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
     },
     settings: {

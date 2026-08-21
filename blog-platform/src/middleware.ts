@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export const SESSION_COOKIE_NAME = "northstar-session";
+export const SESSION_COOKIE_NAME = "perceptron-session";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

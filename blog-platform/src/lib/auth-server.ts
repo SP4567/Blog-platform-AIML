@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-export const SESSION_COOKIE_NAME = "northstar-session";
+export const SESSION_COOKIE_NAME = "perceptron-session";
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 days
 
 export async function hashPassword(password: string): Promise<string> {
