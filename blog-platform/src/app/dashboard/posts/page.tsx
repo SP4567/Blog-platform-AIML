@@ -75,14 +75,14 @@ export default function PostManagerPage() {
           </div>
           <Button
             asChild
-            className="rounded-full gap-3 bg-slate-950 px-5 py-6 text-sm font-medium text-white hover:bg-slate-900 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+            className="rounded-full gap-3 bg-slate-950 px-5 py-6 text-sm font-medium text-white hover:bg-slate-900 dark:bg-indigo-600 dark:text-white dark:hover:bg-indigo-500 shadow-sm"
           >
             <Link
               href="/dashboard/posts/new"
-              className="flex items-center gap-2 text-white"
+              className="flex items-center gap-2 text-white dark:text-white"
             >
-              <PenSquare className="h-4 w-4 shrink-0" />
-              <span>New story</span>
+              <PenSquare className="h-4 w-4 shrink-0 text-white dark:text-white" />
+              <span className="text-white dark:text-white font-semibold">New story</span>
             </Link>
           </Button>
         </div>
