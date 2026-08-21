@@ -115,7 +115,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
               <div className="text-center sm:text-left">
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Written by</p>
                 <h3 className="text-lg font-bold text-slate-950 dark:text-white mt-1">{post.author.name}</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 mt-2">{post.author.bio ?? "Contributing technical writer and systems builder at Northstar Journal."}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300 mt-2">{post.author.bio ?? "Contributing technical writer and systems builder at The Perceptron."}</p>
                 {post.author.location ? (
                   <p className="text-xs text-slate-400 mt-1">Based in {post.author.location}</p>
                 ) : null}

@@ -16,27 +16,35 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #4f46e5 0%, #0f172a 100%)",
+          background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #090d16 100%)",
           borderRadius: "8px",
         }}
       >
         <svg
-          width="22"
-          height="22"
+          width="24"
+          height="24"
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          {/* Neural Synaptic Connections */}
           <path
-            d="M16 9L18.5 13.5L23 16L18.5 18.5L16 23L13.5 18.5L9 16L13.5 13.5L16 9Z"
-            fill="#a5b4fc"
-            opacity="0.75"
+            d="M7 8L20 16M7 16L20 16M7 24L20 16M20 16L28 16"
+            stroke="#818cf8"
+            strokeWidth="2"
+            strokeLinecap="round"
           />
-          <path
-            d="M16 2C16 10 10 16 2 16C10 16 16 22 16 30C16 22 22 16 30 16C22 16 16 10 16 2Z"
-            fill="#ffffff"
-          />
-          <circle cx="16" cy="16" r="2.2" fill="#4f46e5" />
+
+          {/* Input Nodes */}
+          <circle cx="7" cy="8" r="2.5" fill="#38bdf8" />
+          <circle cx="7" cy="16" r="2.5" fill="#818cf8" />
+          <circle cx="7" cy="24" r="2.5" fill="#c084fc" />
+
+          {/* Central Activation Nucleus */}
+          <circle cx="20" cy="16" r="4.2" fill="#ffffff" />
+
+          {/* Output Node */}
+          <circle cx="28" cy="16" r="2" fill="#67e8f9" />
         </svg>
       </div>
     ),

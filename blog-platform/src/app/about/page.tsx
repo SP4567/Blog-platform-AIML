@@ -55,7 +55,7 @@ export default function AboutPage() {
           An enterprise-grade publishing platform designed for speed, trust, and clarity.
         </h1>
         <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
-          Northstar Journal brings together a resilient full-stack architecture, rich Markdown editing workflows, deep role-based access control (RBAC), robust security, and seamless reader engagement for modern technical teams.
+          The Perceptron brings together resilient full-stack architecture, machine learning research essays, on-device AI editorial workflows, deep role-based access control (RBAC), and rich reader engagement for technical teams.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">

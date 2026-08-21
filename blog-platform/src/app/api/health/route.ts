@@ -7,7 +7,7 @@ export async function GET() {
     return NextResponse.json({
       ok: true,
       status: "healthy",
-      service: "northstar-journal",
+      service: "the-perceptron",
       database: "connected",
       timestamp: new Date().toISOString(),
     });
@@ -16,7 +16,7 @@ export async function GET() {
       {
         ok: false,
         status: "degraded",
-        service: "northstar-journal",
+        service: "the-perceptron",
         database: "disconnected",
         error: error instanceof Error ? error.message : "Unknown error",
         timestamp: new Date().toISOString(),

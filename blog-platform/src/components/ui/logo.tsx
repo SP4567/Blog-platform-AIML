@@ -30,7 +30,7 @@ export function LogoIcon({ className, size = "md" }: { className?: string; size?
   return (
     <div
       className={cn(
-        "relative grid place-items-center bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-950 text-white shadow-md shadow-indigo-500/20 ring-1 ring-white/20 transition duration-200 group-hover:scale-105 group-hover:shadow-indigo-500/35",
+        "relative grid place-items-center bg-gradient-to-br from-indigo-600 via-violet-600 to-slate-950 text-white shadow-md shadow-indigo-500/20 ring-1 ring-white/20 transition duration-200 group-hover:scale-105 group-hover:shadow-indigo-500/35",
         sizeMap[size],
         className,
       )}
@@ -41,52 +41,60 @@ export function LogoIcon({ className, size = "md" }: { className?: string; size?
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="transform transition-transform duration-300 group-hover:rotate-12"
+        className="transform transition-transform duration-300 group-hover:scale-110"
       >
         <defs>
-          <linearGradient id="northstarGradient" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+          <linearGradient id="synapseGradient" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#38bdf8" />
+            <stop offset="50%" stopColor="#818cf8" />
+            <stop offset="100%" stopColor="#c084fc" />
+          </linearGradient>
+          <linearGradient id="coreGlow" x1="16" y1="10" x2="26" y2="22" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="50%" stopColor="#c7d2fe" />
-            <stop offset="100%" stopColor="#818cf8" />
+            <stop offset="100%" stopColor="#67e8f9" />
           </linearGradient>
-          <linearGradient id="facetGradient" x1="6" y1="6" x2="26" y2="26" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#e0e7ff" />
-            <stop offset="100%" stopColor="#6366f1" />
-          </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <filter id="perceptronGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.2" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
-        {/* Diagonal Subtle Flares */}
+        {/* Neural Synaptic Connections */}
         <path
-          d="M16 9L18.5 13.5L23 16L18.5 18.5L16 23L13.5 18.5L9 16L13.5 13.5L16 9Z"
-          fill="url(#facetGradient)"
-          opacity="0.65"
+          d="M7 8L20 16M7 16L20 16M7 24L20 16M20 16L28 16"
+          stroke="url(#synapseGradient)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          opacity="0.85"
         />
 
-        {/* Primary 4-Point North Star */}
-        <path
-          d="M16 2C16 10 10 16 2 16C10 16 16 22 16 30C16 22 22 16 30 16C22 16 16 10 16 2Z"
-          fill="url(#northstarGradient)"
-          filter="url(#glow)"
+        {/* Input Nodes */}
+        <circle cx="7" cy="8" r="2.2" fill="#38bdf8" />
+        <circle cx="7" cy="16" r="2.2" fill="#818cf8" />
+        <circle cx="7" cy="24" r="2.2" fill="#c084fc" />
+
+        {/* Activation Ring */}
+        <circle
+          cx="20"
+          cy="16"
+          r="5.5"
+          stroke="url(#synapseGradient)"
+          strokeWidth="1.5"
+          strokeDasharray="2 1.5"
+          opacity="0.6"
         />
 
-        {/* Facet Shading */}
-        <path
-          d="M16 2C16 10 10 16 2 16L16 16L16 2Z"
-          fill="#ffffff"
-          opacity="0.3"
-        />
-        <path
-          d="M16 30C16 22 22 16 30 16L16 16L16 30Z"
-          fill="#312e81"
-          opacity="0.3"
+        {/* Central Perceptron Activation Nucleus */}
+        <circle
+          cx="20"
+          cy="16"
+          r="3.8"
+          fill="url(#coreGlow)"
+          filter="url(#perceptronGlow)"
         />
 
-        {/* Center Diamond Core */}
-        <circle cx="16" cy="16" r="2.2" fill="#ffffff" />
+        {/* Output Node */}
+        <circle cx="28" cy="16" r="1.8" fill="#ffffff" />
       </svg>
     </div>
   );
@@ -110,21 +118,17 @@ export function Logo({
     <div className={cn("group inline-flex items-center gap-3 select-none", className)}>
       <LogoIcon size={size} />
       {showText && !iconOnly ? (
-        <div className="flex items-baseline gap-1.5">
-          <span
-            className={cn(
-              "font-bold tracking-tight text-slate-950 dark:text-white transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
-              textSizeMap[size],
-            )}
-          >
-            Northstar
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-indigo-500 dark:text-indigo-400">
+            The
           </span>
           <span
             className={cn(
-              "font-semibold tracking-tight text-slate-600 dark:text-slate-400 font-serif italic text-[0.95em]",
+              "font-extrabold tracking-tight text-slate-950 dark:text-white transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
+              textSizeMap[size],
             )}
           >
-            Journal
+            Perceptron
           </span>
         </div>
       ) : null}

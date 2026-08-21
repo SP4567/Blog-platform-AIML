@@ -121,7 +121,7 @@ export function AIReaderCompanion(props: AIReaderCompanionProps) {
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Extracted with Northstar Editorial AI • Zero Data Tracking
+                Extracted with The Perceptron AI • Zero Data Tracking
               </p>
             </div>
           </div>

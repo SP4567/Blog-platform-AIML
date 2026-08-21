@@ -214,7 +214,7 @@ export function AIWritingAssistant({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold text-slate-900 dark:text-white text-sm">Northstar Editorial AI</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-white text-sm">Perceptron AI Copilot</h3>
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 dark:border dark:border-emerald-800">
                 <ShieldCheck className="h-3 w-3" />
                 AI Active

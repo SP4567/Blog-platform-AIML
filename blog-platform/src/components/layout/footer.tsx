@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <div>
           <Logo size="md" className="[&_span]:text-white dark:[&_span]:text-white" />
-          <p className="mt-3 max-w-md text-sm text-slate-400">A polished publishing platform for ambitious teams building the next wave of editorial products.</p>
+          <p className="mt-3 max-w-md text-sm text-slate-400">The premier publication for artificial intelligence, machine learning systems, and modern software architecture.</p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm">
           <Link href="/about" className="transition hover:text-white">About</Link>

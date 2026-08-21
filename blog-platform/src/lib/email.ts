@@ -2,7 +2,7 @@ import { Resend } from "resend";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const fromEmail = process.env.EMAIL_FROM || "Northstar Journal <onboarding@resend.dev>";
+const fromEmail = process.env.EMAIL_FROM || "The Perceptron <onboarding@resend.dev>";
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 export interface EmailResult {
@@ -13,7 +13,7 @@ export interface EmailResult {
 }
 
 export async function sendNewsletterWelcomeEmail(recipientEmail: string): Promise<EmailResult> {
-  const subject = "Welcome to Northstar Journal — You're officially subscribed!";
+  const subject = "Welcome to The Perceptron — You're officially subscribed!";
   
   const htmlContent = `
 <!DOCTYPE html>
@@ -31,29 +31,29 @@ export async function sendNewsletterWelcomeEmail(recipientEmail: string): Promis
           
           <!-- Header Banner -->
           <tr>
-            <td style="background: linear-gradient(135deg, #020617 0%, #0f172a 100%); padding: 36px 32px; text-align: center;">
+            <td style="background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #0f172a 100%); padding: 36px 32px; text-align: center;">
               <div style="display: inline-block; background-color: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 9999px; padding: 6px 16px; margin-bottom: 12px;">
-                <span style="color: #a5b4fc; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Editorial Intelligence</span>
+                <span style="color: #a5b4fc; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Autonomous Intelligence & Systems</span>
               </div>
-              <h1 style="margin: 0; color: #ffffff; font-size: 26px; font-weight: 700; letter-spacing: -0.02em;">Northstar Journal</h1>
-              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 14px;">The modern technical publication for builders & architects</p>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: -0.02em;">The Perceptron</h1>
+              <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 14px;">The modern AI, machine learning & systems publication</p>
             </td>
           </tr>
 
           <!-- Main Content -->
           <tr>
             <td style="padding: 40px 32px;">
-              <h2 style="margin: 0 0 16px 0; color: #0f172a; font-size: 20px; font-weight: 700;">Welcome to the community! 🎉</h2>
+              <h2 style="margin: 0 0 16px 0; color: #0f172a; font-size: 20px; font-weight: 700;">Welcome to the network! 🎉</h2>
               <p style="margin: 0 0 20px 0; color: #475569; font-size: 15px; line-height: 1.6;">
-                Thank you for subscribing to <strong>Northstar Journal</strong>. You are now connected to our weekly dispatch of in-depth engineering breakdowns, AI advancements, and modern web architectures.
+                Thank you for subscribing to <strong>The Perceptron</strong>. You are now connected to our weekly dispatch of in-depth machine learning breakdowns, AI advancements, and modern cloud architecture essays.
               </p>
 
               <!-- Highlights Box -->
               <div style="background-color: #f1f5f9; border-radius: 16px; padding: 20px; margin-bottom: 28px; border-left: 4px solid #6366f1;">
                 <p style="margin: 0 0 10px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #334155;">What to expect each Friday:</p>
                 <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 14px; line-height: 1.7;">
-                  <li style="margin-bottom: 6px;"><strong>Deep-Dive Case Studies:</strong> Full-stack architectures, Next.js optimization, and database scalability.</li>
-                  <li style="margin-bottom: 6px;"><strong>AI & Autonomous Systems:</strong> Real-world integration of on-device LLMs, transformers, and automated editorial workflows.</li>
+                  <li style="margin-bottom: 6px;"><strong>Deep-Dive Systems & ML:</strong> Neural architectures, distributed model serving, and high-performance engineering.</li>
+                  <li style="margin-bottom: 6px;"><strong>AI & Autonomous Agents:</strong> Real-world integration of on-device LLMs, transformers, and autonomous workflows.</li>
                   <li style="margin-bottom: 0;"><strong>Curated Tooling:</strong> Production-tested developer tools, libraries, and open-source releases.</li>
                 </ul>
               </div>
@@ -66,7 +66,7 @@ export async function sendNewsletterWelcomeEmail(recipientEmail: string): Promis
               </div>
 
               <p style="margin: 24px 0 0 0; color: #64748b; font-size: 14px; line-height: 1.5;">
-                Have ideas or topics you'd love to see covered? Feel free to reply directly to this email or reach out to our editorial desk anytime.
+                Have questions or ideas you'd like to explore? Reply directly to this email to get in touch with our editorial desk.
               </p>
             </td>
           </tr>
@@ -75,10 +75,10 @@ export async function sendNewsletterWelcomeEmail(recipientEmail: string): Promis
           <tr>
             <td style="background-color: #f8fafc; padding: 24px 32px; border-top: 1px solid #e2e8f0; text-align: center;">
               <p style="margin: 0 0 8px 0; color: #94a3b8; font-size: 12px;">
-                You received this email because you subscribed to Northstar Journal with <strong>${recipientEmail}</strong>.
+                You received this email because you subscribed to The Perceptron with <strong>${recipientEmail}</strong>.
               </p>
               <p style="margin: 0; color: #cbd5e1; font-size: 12px;">
-                &copy; ${new Date().getFullYear()} Northstar Journal. All rights reserved.
+                &copy; ${new Date().getFullYear()} The Perceptron. All rights reserved.
               </p>
             </td>
           </tr>
@@ -92,18 +92,18 @@ export async function sendNewsletterWelcomeEmail(recipientEmail: string): Promis
   `.trim();
 
   const textContent = `
-Welcome to Northstar Journal!
+Welcome to The Perceptron!
 
-Thank you for subscribing to Northstar Journal. You're now subscribed with ${recipientEmail}.
+Thank you for subscribing to The Perceptron. You're now subscribed with ${recipientEmail}.
 
 What to expect in your inbox every Friday:
-- Deep-Dive Case Studies on full-stack architecture and high-performance web systems
-- AI & Autonomous editorial workflows and on-device intelligence
+- Deep-Dive Systems & ML architectures, model serving, and distributed engineering
+- AI & Autonomous Agents with production-grade workflows
 - Curated developer tooling and best practices
 
 Explore the latest articles: ${appUrl}
 
-© ${new Date().getFullYear()} Northstar Journal. All rights reserved.
+© ${new Date().getFullYear()} The Perceptron. All rights reserved.
   `.trim();
 
   if (resend) {
@@ -117,30 +117,28 @@ Explore the latest articles: ${appUrl}
       });
 
       if (error) {
-        console.error("[Email] Resend API error:", error);
+        console.error("Resend API delivery error:", error);
         return { success: false, error: error.message };
       }
 
-      console.log(`[Email] Welcome email sent via Resend to ${recipientEmail}, id: ${data?.id}`);
       return { success: true, messageId: data?.id };
     } catch (err) {
-      console.error("[Email] Unexpected failure sending email via Resend:", err);
-      return { success: false, error: err instanceof Error ? err.message : "Failed to send email" };
+      console.error("Resend execution error:", err);
+      return { success: false, error: err instanceof Error ? err.message : "Unknown email error" };
     }
-  } else {
-    // Development / Local fallback mode
-    console.log(`\n================= [EMAIL DISPATCH SIMULATION] =================`);
-    console.log(`To: ${recipientEmail}`);
-    console.log(`From: ${fromEmail}`);
-    console.log(`Subject: ${subject}`);
-    console.log(`Status: Successfully generated and queued for delivery.`);
-    console.log(`(Configure RESEND_API_KEY in .env to deliver real emails to inboxes via Resend)`);
-    console.log(`=================================================================\n`);
-
-    return {
-      success: true,
-      simulated: true,
-      messageId: `sim_${Date.now()}_${Math.random().toString(36).substring(7)}`,
-    };
   }
+
+  // Fallback: Simulation Mode when no RESEND_API_KEY is configured
+  console.log(`\n========================================`);
+  console.log(`[EMAIL DISPATCH SIMULATION]`);
+  console.log(`To: ${recipientEmail}`);
+  console.log(`From: ${fromEmail}`);
+  console.log(`Subject: ${subject}`);
+  console.log(`========================================\n`);
+
+  return {
+    success: true,
+    simulated: true,
+    messageId: `sim_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+  };
 }

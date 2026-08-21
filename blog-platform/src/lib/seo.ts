@@ -1,8 +1,8 @@
 export const siteConfig = {
-  title: "Northstar Journal",
-  description: "A premium publishing experience for developers, designers, and builders.",
-  url: "https://northstar-journal.dev",
-  author: "Northstar Studio",
+  title: "The Perceptron",
+  description: "Autonomous intelligence, machine learning systems, and engineering essays for modern builders.",
+  url: "https://theperceptron.dev",
+  author: "The Perceptron Editorial Team",
 };
 
 export function createMetadata(title: string, description = siteConfig.description) {
