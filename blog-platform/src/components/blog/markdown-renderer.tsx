@@ -78,70 +78,70 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
   }
 
   return (
-    <div className={`markdown-content leading-relaxed text-slate-800 space-y-4 ${className}`}>
+    <div className={`markdown-content leading-relaxed text-slate-800 dark:text-slate-200 space-y-4 transition-colors ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ ...props }) => (
             <h1
-              className="text-2xl sm:text-3xl font-bold text-slate-950 mt-8 mb-4 tracking-tight leading-tight border-b border-slate-200/70 pb-2"
+              className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white mt-8 mb-4 tracking-tight leading-tight border-b border-slate-200/70 dark:border-slate-800 pb-2"
               {...props}
             />
           ),
           h2: ({ ...props }) => (
             <h2
-              className="text-xl sm:text-2xl font-bold text-slate-950 mt-7 mb-3 tracking-tight border-b border-slate-100 pb-1.5"
+              className="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white mt-7 mb-3 tracking-tight border-b border-slate-100 dark:border-slate-800 pb-1.5"
               {...props}
             />
           ),
           h3: ({ ...props }) => (
-            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mt-6 mb-2 tracking-tight" {...props} />
+            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-100 mt-6 mb-2 tracking-tight" {...props} />
           ),
           h4: ({ ...props }) => (
-            <h4 className="text-base sm:text-lg font-semibold text-slate-900 mt-4 mb-2" {...props} />
+            <h4 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100 mt-4 mb-2" {...props} />
           ),
           p: ({ ...props }) => (
-            <p className="text-slate-700 leading-relaxed text-base sm:text-lg my-3" {...props} />
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-lg my-3" {...props} />
           ),
           ul: ({ ...props }) => (
-            <ul className="list-disc list-outside pl-6 my-4 space-y-2 text-slate-700 text-base sm:text-lg" {...props} />
+            <ul className="list-disc list-outside pl-6 my-4 space-y-2 text-slate-700 dark:text-slate-300 text-base sm:text-lg" {...props} />
           ),
           ol: ({ ...props }) => (
-            <ol className="list-decimal list-outside pl-6 my-4 space-y-2 text-slate-700 text-base sm:text-lg" {...props} />
+            <ol className="list-decimal list-outside pl-6 my-4 space-y-2 text-slate-700 dark:text-slate-300 text-base sm:text-lg" {...props} />
           ),
-          li: ({ ...props }) => <li className="leading-relaxed" {...props} />,
+          li: ({ ...props }) => <li className="leading-relaxed text-slate-700 dark:text-slate-300" {...props} />,
           blockquote: ({ ...props }) => (
             <blockquote
-              className="border-l-4 border-indigo-500 bg-indigo-50/50 px-5 py-3.5 my-6 rounded-r-2xl italic text-slate-700"
+              className="border-l-4 border-indigo-500 bg-indigo-50/50 dark:bg-indigo-950/40 px-5 py-3.5 my-6 rounded-r-2xl italic text-slate-700 dark:text-slate-200"
               {...props}
             />
           ),
-          hr: ({ ...props }) => <hr className="my-8 border-t border-slate-200" {...props} />,
+          hr: ({ ...props }) => <hr className="my-8 border-t border-slate-200 dark:border-slate-800" {...props} />,
           a: ({ ...props }) => (
             <a
-              className="font-medium text-indigo-600 underline underline-offset-4 decoration-indigo-300 hover:text-indigo-800 hover:decoration-indigo-600 transition"
+              className="font-medium text-indigo-600 dark:text-indigo-400 underline underline-offset-4 decoration-indigo-300 dark:decoration-indigo-600 hover:text-indigo-800 dark:hover:text-indigo-300 transition"
               target="_blank"
               rel="noopener noreferrer"
               {...props}
             />
           ),
-          strong: ({ ...props }) => <strong className="font-bold text-slate-950" {...props} />,
-          em: ({ ...props }) => <em className="italic text-slate-800" {...props} />,
+          strong: ({ ...props }) => <strong className="font-bold text-slate-950 dark:text-white" {...props} />,
+          em: ({ ...props }) => <em className="italic text-slate-800 dark:text-slate-200" {...props} />,
           table: ({ ...props }) => (
-            <div className="overflow-x-auto my-6 rounded-2xl border border-slate-200 shadow-xs">
-              <table className="min-w-full divide-y divide-slate-200 text-left text-sm" {...props} />
+            <div className="overflow-x-auto my-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+              <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-left text-sm" {...props} />
             </div>
           ),
-          thead: ({ ...props }) => <thead className="bg-slate-50 text-slate-900 font-semibold" {...props} />,
-          tbody: ({ ...props }) => <tbody className="divide-y divide-slate-100 bg-white text-slate-700" {...props} />,
-          th: ({ ...props }) => <th className="px-4 py-3 text-left font-semibold text-slate-900" {...props} />,
-          td: ({ ...props }) => <td className="px-4 py-3 text-slate-700" {...props} />,
+          thead: ({ ...props }) => <thead className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 font-semibold border-b border-slate-200 dark:border-slate-700" {...props} />,
+          tbody: ({ ...props }) => <tbody className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300" {...props} />,
+          th: ({ ...props }) => <th className="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100" {...props} />,
+          td: ({ ...props }) => <td className="px-4 py-3 text-slate-700 dark:text-slate-300" {...props} />,
           code: CodeBlock,
           pre: ({ children }) => <>{children}</>,
           img: ({ alt, ...props }) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              className="rounded-2xl max-w-full my-6 shadow-sm border border-slate-100 mx-auto"
+              className="rounded-2xl max-w-full my-6 shadow-sm border border-slate-100 dark:border-slate-800 mx-auto"
               alt={alt || "Blog visual"}
               {...props}
             />
