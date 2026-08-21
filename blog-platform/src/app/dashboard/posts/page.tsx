@@ -70,25 +70,25 @@ export default function PostManagerPage() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Dashboard</p>
-            <h1 className="mt-1 text-3xl font-bold text-slate-950">Manage Stories</h1>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Dashboard</p>
+            <h1 className="mt-1 text-3xl font-bold text-slate-950 dark:text-white">Manage Stories</h1>
           </div>
           <Button
-              asChild
-              className="rounded-full gap-3 bg-slate-950 px-5 py-6 text-sm font-medium text-white hover:bg-slate-900"
+            asChild
+            className="rounded-full gap-3 bg-slate-950 px-5 py-6 text-sm font-medium text-white hover:bg-slate-900 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+          >
+            <Link
+              href="/dashboard/posts/new"
+              className="flex items-center gap-2 text-white"
             >
-              <Link
-                href="/dashboard/posts/new"
-                className="flex items-center gap-2 text-white"
-              >
-                <PenSquare className="h-4 w-4 shrink-0" />
-                <span>New story</span>
-              </Link>
-            </Button>
+              <PenSquare className="h-4 w-4 shrink-0" />
+              <span>New story</span>
+            </Link>
+          </Button>
         </div>
 
         {/* Status Filter Tabs */}
-        <div className="mt-8 flex items-center gap-2 border-b border-slate-200 pb-4">
+        <div className="mt-8 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
           {(["all", "published", "draft"] as const).map((tab) => {
             const count = tab === "all" ? posts.length : posts.filter((p) => p.status === tab).length;
             const isSelected = filter === tab;
@@ -97,7 +97,9 @@ export default function PostManagerPage() {
                 key={tab}
                 onClick={() => setFilter(tab)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
-                  isSelected ? "bg-slate-950 text-white" : "text-slate-600 hover:bg-slate-100"
+                  isSelected
+                    ? "bg-slate-950 text-white dark:bg-indigo-600 dark:text-white"
+                    : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-white"
                 }`}
               >
                 {tab} ({count})
@@ -110,14 +112,14 @@ export default function PostManagerPage() {
         <div className="mt-8">
           {isLoading ? (
             <div className="flex items-center justify-center py-16 text-slate-400 gap-2">
-              <Loader2 className="h-6 w-6 animate-spin text-slate-600" />
+              <Loader2 className="h-6 w-6 animate-spin text-slate-600 dark:text-slate-400" />
               <span>Loading your stories…</span>
             </div>
           ) : filteredPosts.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-slate-200 p-12 text-center">
-              <p className="text-base font-medium text-slate-700">No stories found in this tab</p>
-              <p className="text-sm text-slate-500 mt-1">Create a new post or change your filter.</p>
-              <Button asChild className="mt-4 rounded-full">
+            <div className="rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 p-12 text-center">
+              <p className="text-base font-medium text-slate-700 dark:text-slate-300">No stories found in this tab</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Create a new post or change your filter.</p>
+              <Button asChild className="mt-4 rounded-full dark:bg-indigo-600 dark:hover:bg-indigo-500">
                 <Link href="/dashboard/posts/new" className="text-white">Write a story</Link>
               </Button>
             </div>
@@ -133,8 +135,8 @@ export default function PostManagerPage() {
                           <span
                             className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
                               post.status === "published"
-                                ? "bg-emerald-100 text-emerald-700"
-                                : "bg-amber-100 text-amber-700"
+                                ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 dark:border dark:border-emerald-800"
+                                : "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 dark:border dark:border-amber-800"
                             }`}
                           >
                             {post.status}
@@ -157,7 +159,7 @@ export default function PostManagerPage() {
                       </CardDescription>
                     </CardHeader>
                   </div>
-                  <div className="flex items-center justify-between border-t border-slate-100 pt-4 text-xs text-slate-500">
+                  <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4 text-xs text-slate-500 dark:text-slate-400">
                     <div className="flex items-center gap-4">
                       <span>{post.views} views</span>
                       <span>{post.likes ?? 0} likes</span>
@@ -183,7 +185,7 @@ export default function PostManagerPage() {
                       <Button
                         asChild
                         size="sm"
-                        className="h-8 rounded-full px-3"
+                        className="h-8 rounded-full px-3 dark:bg-indigo-600 dark:hover:bg-indigo-500"
                       >
                         <Link
                           href={`/dashboard/posts/${post.id}/edit`}
@@ -198,7 +200,8 @@ export default function PostManagerPage() {
                         size="sm"
                         disabled={deletingId === post.id}
                         onClick={() => handleDelete(post.id)}
-                        className="rounded-full h-8 px-2.5 text-rose-600 hover:bg-rose-50 hover:border-rose-200"
+                        className="rounded-full h-8 px-2.5 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:border-rose-200 dark:hover:border-rose-800"
+                        aria-label="Delete story"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                       </Button>

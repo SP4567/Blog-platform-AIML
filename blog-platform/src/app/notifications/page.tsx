@@ -16,15 +16,15 @@ export default function NotificationsPage() {
         </CardHeader>
         <div className="space-y-4">
           {notifications.length === 0 ? (
-            <div className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-700">No notifications yet.</div>
+            <div className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-700 dark:border-slate-800 dark:text-slate-300">No notifications yet.</div>
           ) : (
             notifications.map((notification) => (
-              <div key={notification.id} className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-700">
+              <div key={notification.id} className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-700 dark:border-slate-800 dark:text-slate-300">
                 <div className="flex items-center justify-between gap-3">
                   <span>{notification.title}</span>
-                  {notification.unread ? <span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-700">New</span> : null}
+                  {notification.unread ? <span className="rounded-full bg-amber-100 px-2 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300 dark:border dark:border-amber-800">New</span> : null}
                 </div>
-                <p className="mt-2 text-xs text-slate-500">{new Date(notification.createdAt).toLocaleString()}</p>
+                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{new Date(notification.createdAt).toLocaleString()}</p>
               </div>
             ))
           )}

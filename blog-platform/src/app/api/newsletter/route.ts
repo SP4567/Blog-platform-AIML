@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { newsletterSchema } from "@/lib/validation";
+import { sendNewsletterWelcomeEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   const payload = await request.json();
@@ -17,11 +18,15 @@ export async function POST(request: Request) {
       create: { email: parsed.data.email },
     });
 
+    // Send professional confirmation & welcome email
+    const emailResult = await sendNewsletterWelcomeEmail(subscription.email);
+
     return NextResponse.json(
       {
         ok: true,
-        message: "Subscribed to the newsletter.",
+        message: "Thank you for subscribing! A welcome email has been sent to your inbox.",
         email: subscription.email,
+        emailDelivered: emailResult.success,
       },
       { status: 201 },
     );

@@ -6,7 +6,8 @@ import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth, type AuthUser } from "@/lib/auth";
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle2, AlertCircle, Palette } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: Partial<AuthUser>) => void }) {
   const [name, setName] = useState(user.name ?? "");
@@ -59,7 +60,7 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
       </CardHeader>
       <form onSubmit={handleProfileSave} className="space-y-4 pt-1">
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Display Name</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Display Name</label>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -68,17 +69,17 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Bio</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Bio</label>
           <textarea
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             placeholder="Tell readers about your work, background, and focus areas"
             rows={3}
-            className="w-full rounded-2xl border border-slate-200 p-3 text-sm text-slate-800 outline-none focus:border-slate-400"
+            className="w-full rounded-2xl border border-slate-200 p-3 text-sm text-slate-800 outline-none focus:border-slate-400 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-slate-600 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Location</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Location</label>
           <Input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
@@ -86,7 +87,7 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Personal Website / Portfolio</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Personal Website / Portfolio</label>
           <Input
             value={website}
             onChange={(e) => setWebsite(e.target.value)}
@@ -94,7 +95,7 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Avatar Image URL</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Avatar Image URL</label>
           <Input
             value={image}
             onChange={(e) => setImage(e.target.value)}
@@ -104,14 +105,16 @@ function ProfileForm({ user, updateUser }: { user: AuthUser; updateUser: (data: 
 
         {profileMsg ? (
           <div className={`flex items-center gap-2 text-sm p-3 rounded-2xl ${
-            profileStatus === "success" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-rose-50 text-rose-700 border border-rose-200"
+            profileStatus === "success"
+              ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800"
+              : "bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800"
           }`}>
-            {profileStatus === "success" ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+            {profileStatus === "success" ? <CheckCircle2 className="h-4 w-4 shrink-0" /> : <AlertCircle className="h-4 w-4 shrink-0" />}
             <span>{profileMsg}</span>
           </div>
         ) : null}
 
-        <Button type="submit" disabled={profileStatus === "loading"} className="rounded-full">
+        <Button type="submit" disabled={profileStatus === "loading"} className="rounded-full dark:bg-indigo-600 dark:hover:bg-indigo-500">
           {profileStatus === "loading" ? "Saving profile…" : "Save profile"}
         </Button>
       </form>
@@ -179,7 +182,7 @@ function PasswordForm() {
       </CardHeader>
       <form onSubmit={handlePasswordChange} className="space-y-4 pt-1">
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Current Password</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Current Password</label>
           <Input
             type="password"
             value={currentPassword}
@@ -189,7 +192,7 @@ function PasswordForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">New Password</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">New Password</label>
           <Input
             type="password"
             value={newPassword}
@@ -199,7 +202,7 @@ function PasswordForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1">Confirm New Password</label>
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Confirm New Password</label>
           <Input
             type="password"
             value={confirmPassword}
@@ -211,14 +214,16 @@ function PasswordForm() {
 
         {secMsg ? (
           <div className={`flex items-center gap-2 text-sm p-3 rounded-2xl ${
-            secStatus === "success" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-rose-50 text-rose-700 border border-rose-200"
+            secStatus === "success"
+              ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800"
+              : "bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800"
           }`}>
-            {secStatus === "success" ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
+            {secStatus === "success" ? <CheckCircle2 className="h-4 w-4 shrink-0" /> : <AlertCircle className="h-4 w-4 shrink-0" />}
             <span>{secMsg}</span>
           </div>
         ) : null}
 
-        <Button type="submit" disabled={secStatus === "loading"} className="rounded-full">
+        <Button type="submit" disabled={secStatus === "loading"} className="rounded-full dark:bg-indigo-600 dark:hover:bg-indigo-500">
           {secStatus === "loading" ? "Updating password…" : "Update password"}
         </Button>
       </form>
@@ -233,17 +238,33 @@ export default function SettingsPage() {
     <ProtectedRoute>
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Account</p>
-          <h1 className="mt-1 text-3xl font-bold text-slate-950">Settings & Preferences</h1>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Account</p>
+          <h1 className="mt-1 text-3xl font-bold text-slate-950 dark:text-white">Settings & Preferences</h1>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
           {user ? (
             <ProfileForm key={user.id} user={user} updateUser={updateUser} />
           ) : (
-            <Card><p className="p-6 text-sm text-slate-500">Loading user profile…</p></Card>
+            <Card><p className="p-6 text-sm text-slate-500 dark:text-slate-400">Loading user profile…</p></Card>
           )}
-          <PasswordForm />
+          <div className="space-y-8">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Palette className="h-5 w-5 text-indigo-500" />
+                  <CardTitle>Interface Appearance</CardTitle>
+                </div>
+                <CardDescription>Select your preferred editorial workspace theme or sync with your operating system.</CardDescription>
+              </CardHeader>
+              <div className="pt-2">
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-3">Color Mode</label>
+                <ThemeToggle variant="segmented" />
+              </div>
+            </Card>
+
+            <PasswordForm />
+          </div>
         </div>
       </div>
     </ProtectedRoute>

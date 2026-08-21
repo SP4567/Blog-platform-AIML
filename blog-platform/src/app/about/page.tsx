@@ -28,7 +28,8 @@ export default function AboutPage() {
       const data = await res.json();
       if (!res.ok || !data.ok) {
         setStatus("error");
-        setResponseMsg(data.error ?? "Failed to send message.");
+        const firstError = data.errors ? (Object.values(data.errors).flat()[0] as string) : undefined;
+        setResponseMsg(firstError || data.message || data.error || "Failed to send message.");
         return;
       }
 
@@ -45,33 +46,33 @@ export default function AboutPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 lg:px-8 space-y-12">
-      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm">
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-slate-700">
-          <Sparkles className="h-3.5 w-3.5 text-fuchsia-600" />
+      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm dark:border-slate-800 dark:bg-slate-900 transition-colors">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:border-slate-800 dark:bg-slate-800 dark:text-slate-300">
+          <Sparkles className="h-3.5 w-3.5 text-fuchsia-600 dark:text-fuchsia-400" />
           Editorial Architecture
         </div>
-        <h1 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight text-slate-950 leading-tight">
+        <h1 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight text-slate-950 dark:text-white leading-tight">
           An enterprise-grade publishing platform designed for speed, trust, and clarity.
         </h1>
-        <p className="mt-6 text-lg leading-8 text-slate-600">
+        <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
           Northstar Journal brings together a resilient full-stack architecture, rich Markdown editing workflows, deep role-based access control (RBAC), robust security, and seamless reader engagement for modern technical teams.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6">
+          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6 dark:border-slate-800 dark:bg-slate-800/60">
             <Zap className="h-6 w-6 text-amber-500 mb-3" />
-            <h3 className="font-semibold text-slate-900">Zero-Latency ISR</h3>
-            <p className="mt-2 text-sm text-slate-600">Incremental Static Regeneration delivers instantaneous page loads with background revalidation.</p>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Zero-Latency ISR</h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Incremental Static Regeneration delivers instantaneous page loads with background revalidation.</p>
           </div>
-          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6">
+          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6 dark:border-slate-800 dark:bg-slate-800/60">
             <Shield className="h-6 w-6 text-indigo-500 mb-3" />
-            <h3 className="font-semibold text-slate-900">Hardened Security</h3>
-            <p className="mt-2 text-sm text-slate-600">bcrypt hashing, HTTP-only SameSite cookies, security headers, and Zod input validation schemas.</p>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Hardened Security</h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">bcrypt hashing, HTTP-only SameSite cookies, security headers, and Zod input validation schemas.</p>
           </div>
-          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6">
+          <div className="rounded-3xl border border-slate-100 bg-slate-50/70 p-6 dark:border-slate-800 dark:bg-slate-800/60">
             <Layers className="h-6 w-6 text-emerald-500 mb-3" />
-            <h3 className="font-semibold text-slate-900">Relational Power</h3>
-            <p className="mt-2 text-sm text-slate-600">Prisma ORM with PostgreSQL backend powers post taxonomy, likes, bookmarks, and thread discussions.</p>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Relational Power</h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Prisma ORM with PostgreSQL backend powers post taxonomy, likes, bookmarks, and thread discussions.</p>
           </div>
         </div>
       </div>
@@ -88,7 +89,7 @@ export default function AboutPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Your Name</label>
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
                 <Input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -97,7 +98,7 @@ export default function AboutPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Email Address</label>
                 <Input
                   type="email"
                   value={email}
@@ -108,20 +109,22 @@ export default function AboutPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-600 mb-1">Message / Proposal</label>
+              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Message / Proposal</label>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Share your pitch, article ideas, or feedback…"
                 rows={4}
                 required
-                className="w-full rounded-2xl border border-slate-200 p-3 text-sm text-slate-800 outline-none focus:border-slate-400"
+                className="w-full rounded-2xl border border-slate-200 p-3 text-sm text-slate-800 outline-none focus:border-slate-400 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-slate-600"
               />
             </div>
 
             {responseMsg ? (
               <div className={`flex items-center gap-2 text-sm p-3.5 rounded-2xl ${
-                status === "success" ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-rose-50 text-rose-800 border border-rose-200"
+                status === "success"
+                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800"
+                  : "bg-rose-50 text-rose-800 border border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800"
               }`}>
                 {status === "success" ? <CheckCircle2 className="h-4 w-4 shrink-0" /> : <AlertCircle className="h-4 w-4 shrink-0" />}
                 <span>{responseMsg}</span>

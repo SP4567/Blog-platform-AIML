@@ -10,9 +10,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ className, variant = "default", size = "default", asChild = false, children, ...props }: ButtonProps) {
   const variants = {
-    default: "bg-slate-950 text-white hover:bg-slate-800",
-    outline: "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50",
-    ghost: "bg-transparent text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+    default: "bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200",
+    outline: "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800",
+    ghost: "bg-transparent text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white",
   };
   const sizes = {
     default: "h-10 px-4 py-2",
@@ -20,7 +20,7 @@ export function Button({ className, variant = "default", size = "default", asChi
     lg: "h-12 px-6",
   };
 
-  const buttonClassName = cn("inline-flex items-center justify-center rounded-full font-medium transition", variants[variant], sizes[size], className);
+  const buttonClassName = cn("inline-flex items-center justify-center rounded-full font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed", variants[variant], sizes[size], className);
 
   if (asChild && isValidElement(children)) {
     const child = children as ReactElement<{ className?: string; children?: ReactNode }>;

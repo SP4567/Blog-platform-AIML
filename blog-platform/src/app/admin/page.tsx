@@ -115,7 +115,7 @@ export default function AdminPage() {
   };
 
   const handleDeletePost = async (postId: string) => {
-    if (!window.confirm("Are you sure you want to delete this story as an administrator?")) {
+    if (!window.confirm("Are you sure you want to permanently delete this story as an administrator?")) {
       return;
     }
 
@@ -141,10 +141,10 @@ export default function AdminPage() {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-cyan-600" />
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Administration</p>
+              <ShieldCheck className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Administration</p>
             </div>
-            <h1 className="mt-1 text-3xl font-bold text-slate-950">Platform Control Center</h1>
+            <h1 className="mt-1 text-3xl font-bold text-slate-950 dark:text-white">Platform Control Center</h1>
           </div>
           <div className="flex items-center gap-2">
             <Button asChild variant="outline" className="rounded-full">
@@ -154,27 +154,36 @@ export default function AdminPage() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 pb-4 mb-8">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4 mb-8">
           <button
+            type="button"
             onClick={() => setTab("overview")}
             className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-              tab === "overview" ? "bg-slate-950 text-white" : "text-slate-600 hover:bg-slate-100"
+              tab === "overview"
+                ? "bg-slate-950 text-white dark:bg-indigo-600 dark:text-white"
+                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-white"
             }`}
           >
             <BarChart3 className="h-4 w-4" /> Overview
           </button>
           <button
+            type="button"
             onClick={() => setTab("users")}
             className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-              tab === "users" ? "bg-slate-950 text-white" : "text-slate-600 hover:bg-slate-100"
+              tab === "users"
+                ? "bg-slate-950 text-white dark:bg-indigo-600 dark:text-white"
+                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-white"
             }`}
           >
             <Users className="h-4 w-4" /> User Management ({users.length})
           </button>
           <button
+            type="button"
             onClick={() => setTab("posts")}
             className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-              tab === "posts" ? "bg-slate-950 text-white" : "text-slate-600 hover:bg-slate-100"
+              tab === "posts"
+                ? "bg-slate-950 text-white dark:bg-indigo-600 dark:text-white"
+                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-white"
             }`}
           >
             <FileText className="h-4 w-4" /> Content Moderation ({allPosts.length})
@@ -183,7 +192,7 @@ export default function AdminPage() {
 
         {isLoading ? (
           <div className="flex items-center justify-center py-20 text-slate-400 gap-2">
-            <Loader2 className="h-6 w-6 animate-spin text-slate-600" />
+            <Loader2 className="h-6 w-6 animate-spin text-slate-600 dark:text-slate-400" />
             <span>Loading administrative data…</span>
           </div>
         ) : (
@@ -197,7 +206,7 @@ export default function AdminPage() {
                       <CardDescription>Total Stories</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalPosts}</CardTitle>
                     </CardHeader>
-                    <div className="text-xs text-slate-500 pt-1">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                       {stats.publishedPosts} published • {stats.draftPosts} drafts
                     </div>
                   </Card>
@@ -207,7 +216,7 @@ export default function AdminPage() {
                       <CardDescription>Total Users</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalUsers}</CardTitle>
                     </CardHeader>
-                    <div className="text-xs text-slate-500 pt-1">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                       Registered authors & readers
                     </div>
                   </Card>
@@ -217,7 +226,7 @@ export default function AdminPage() {
                       <CardDescription>Cumulative Views</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalViews.toLocaleString()}</CardTitle>
                     </CardHeader>
-                    <div className="text-xs text-slate-500 pt-1">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                       Reader impressions across site
                     </div>
                   </Card>
@@ -227,7 +236,7 @@ export default function AdminPage() {
                       <CardDescription>Engagement</CardDescription>
                       <CardTitle className="text-3xl font-bold">{stats.totalComments}</CardTitle>
                     </CardHeader>
-                    <div className="text-xs text-slate-500 pt-1">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                       {stats.totalSubscribers} newsletter subscribers
                     </div>
                   </Card>
@@ -241,12 +250,12 @@ export default function AdminPage() {
                     </CardHeader>
                     <div className="space-y-3 pt-1">
                       {users.slice(0, 5).map((u) => (
-                        <div key={u.id} className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-sm">
+                        <div key={u.id} className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2.5 text-sm">
                           <div>
-                            <p className="font-medium text-slate-900">{u.name ?? "User"}</p>
-                            <p className="text-xs text-slate-500">{u.email}</p>
+                            <p className="font-medium text-slate-900 dark:text-white">{u.name ?? "User"}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">{u.email}</p>
                           </div>
-                          <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-700 uppercase">
+                          <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">
                             {u.role}
                           </span>
                         </div>
@@ -260,19 +269,19 @@ export default function AdminPage() {
                       <CardDescription>Database connection and runtime status.</CardDescription>
                     </CardHeader>
                     <div className="space-y-3 pt-1">
-                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 text-sm">
-                        <span className="font-medium text-slate-700">Database Engine</span>
-                        <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-emerald-500"></span> PostgreSQL (Healthy)
+                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 text-sm">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Database Engine</span>
+                        <span className="text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-emerald-500"></span> SQLite (Healthy)
                         </span>
                       </div>
-                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 text-sm">
-                        <span className="font-medium text-slate-700">Password Security</span>
-                        <span className="text-slate-800 font-semibold">bcrypt (10 Salt Rounds)</span>
+                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 text-sm">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Password Security</span>
+                        <span className="text-slate-800 dark:text-slate-200 font-semibold">bcrypt (10 Salt Rounds)</span>
                       </div>
-                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 text-sm">
-                        <span className="font-medium text-slate-700">Session Cookie Policy</span>
-                        <span className="text-slate-800 font-semibold">HTTP-Only, SameSite Lax</span>
+                      <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 text-sm">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">Session Cookie Policy</span>
+                        <span className="text-slate-800 dark:text-slate-200 font-semibold">HTTP-Only, SameSite Lax</span>
                       </div>
                     </div>
                   </Card>
@@ -282,10 +291,10 @@ export default function AdminPage() {
 
             {/* USERS TAB */}
             {tab === "users" ? (
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm text-slate-700">
-                    <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase font-semibold text-slate-500">
+                  <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                    <thead className="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
                       <tr>
                         <th className="px-6 py-4">User</th>
                         <th className="px-6 py-4">Role</th>
@@ -294,19 +303,19 @@ export default function AdminPage() {
                         <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       {users.map((u) => (
-                        <tr key={u.id} className="hover:bg-slate-50/50">
+                        <tr key={u.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                           <td className="px-6 py-4">
-                            <p className="font-medium text-slate-900">{u.name ?? "Unnamed"}</p>
-                            <p className="text-xs text-slate-500">{u.email}</p>
+                            <p className="font-medium text-slate-900 dark:text-white">{u.name ?? "Unnamed"}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">{u.email}</p>
                           </td>
                           <td className="px-6 py-4">
                             <select
                               value={u.role}
                               disabled={actionLoading === u.id}
                               onChange={(e) => handleRoleChange(u.id, e.target.value)}
-                              className="rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-800 outline-none focus:border-slate-400"
+                              className="rounded-xl border border-slate-200 bg-white px-2.5 py-1 text-xs font-medium text-slate-800 outline-none focus:border-slate-400 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-500"
                             >
                               <option value="visitor">Visitor</option>
                               <option value="registered_user">Registered User</option>
@@ -317,7 +326,7 @@ export default function AdminPage() {
                             </select>
                           </td>
                           <td className="px-6 py-4 font-medium">{u._count?.posts ?? 0}</td>
-                          <td className="px-6 py-4 text-xs text-slate-500">
+                          <td className="px-6 py-4 text-xs text-slate-500 dark:text-slate-400">
                             {new Date(u.createdAt).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4 text-right">
@@ -326,7 +335,8 @@ export default function AdminPage() {
                               size="sm"
                               disabled={actionLoading === u.id || u.id === user?.id}
                               onClick={() => handleDeleteUser(u.id)}
-                              className="rounded-full h-8 px-2.5 text-rose-600 hover:bg-rose-50 hover:border-rose-200"
+                              className="rounded-full h-8 px-2.5 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:border-rose-200 dark:hover:border-rose-800"
+                              aria-label="Delete user"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
                             </Button>
@@ -341,10 +351,10 @@ export default function AdminPage() {
 
             {/* POSTS TAB */}
             {tab === "posts" ? (
-              <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm text-slate-700">
-                    <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase font-semibold text-slate-500">
+                  <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+                    <thead className="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
                       <tr>
                         <th className="px-6 py-4">Title & Author</th>
                         <th className="px-6 py-4">Category</th>
@@ -353,21 +363,23 @@ export default function AdminPage() {
                         <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                       {allPosts.map((post) => (
-                        <tr key={post.id} className="hover:bg-slate-50/50">
+                        <tr key={post.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
                           <td className="px-6 py-4">
-                            <p className="font-medium text-slate-900 line-clamp-1">{post.title}</p>
-                            <p className="text-xs text-slate-500">{post.author?.name ?? "Author"}</p>
+                            <p className="font-medium text-slate-900 dark:text-white line-clamp-1">{post.title}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">{post.author?.name ?? "Author"}</p>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs text-slate-700">
+                            <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-xs text-slate-700 dark:text-slate-300">
                               {post.category?.name ?? "General"}
                             </span>
                           </td>
                           <td className="px-6 py-4">
                             <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase ${
-                              post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
+                              post.status === "published"
+                                ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 dark:border dark:border-emerald-800"
+                                : "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 dark:border dark:border-amber-800"
                             }`}>
                               {post.status}
                             </span>
@@ -385,7 +397,8 @@ export default function AdminPage() {
                                 size="sm"
                                 disabled={actionLoading === post.id}
                                 onClick={() => handleDeletePost(post.id)}
-                                className="rounded-full h-8 px-2.5 text-rose-600 hover:bg-rose-50 hover:border-rose-200"
+                                className="rounded-full h-8 px-2.5 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 hover:border-rose-200 dark:hover:border-rose-800"
+                                aria-label="Delete post"
                               >
                                 <Trash2 className="h-3.5 w-3.5" />
                               </Button>

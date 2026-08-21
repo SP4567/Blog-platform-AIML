@@ -36,22 +36,22 @@ export function NewsletterSection() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-      <div className="rounded-[32px] border border-slate-200/80 bg-slate-950 px-8 py-12 text-white shadow-2xl shadow-slate-300/60">
+      <div className="rounded-[32px] border border-slate-200/80 bg-slate-950 px-8 py-12 text-white shadow-2xl shadow-slate-300/60 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none transition-colors">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Newsletter</p>
-            <h2 className="mt-2 text-3xl font-semibold">Weekly insights for builders, authors, and product teams.</h2>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Weekly insights for builders, authors, and product teams.</h2>
             <p className="mt-3 text-slate-400">Subscribe for editorial notes, product updates, and launch-ready ideas each Friday.</p>
           </div>
           <div className="flex w-full max-w-xl flex-col gap-3 sm:flex-row">
             <Input
               placeholder="Email address"
-              className="bg-white text-slate-900"
+              className="bg-white text-slate-900 dark:bg-slate-800 dark:text-white dark:border-slate-700"
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-            <Button type="button" onClick={handleSubscribe} className="rounded-full bg-white text-slate-950 hover:bg-slate-100">
+            <Button type="button" onClick={handleSubscribe} className="rounded-full bg-white text-slate-950 hover:bg-slate-100 dark:bg-indigo-600 dark:text-white dark:hover:bg-indigo-500 shrink-0">
               {status === "loading" ? "Subscribing…" : "Subscribe"}
             </Button>
           </div>

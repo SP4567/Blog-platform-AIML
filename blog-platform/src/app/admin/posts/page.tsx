@@ -15,7 +15,7 @@ export default function AdminPostsPage() {
               <CardTitle>{post.title}</CardTitle>
               <CardDescription>{post.category.name}</CardDescription>
             </CardHeader>
-            <p className="text-sm leading-7 text-slate-600">{post.excerpt}</p>
+            <p className="text-sm leading-7 text-slate-600 dark:text-slate-300">{post.excerpt}</p>
           </Card>
         ))}
       </div>

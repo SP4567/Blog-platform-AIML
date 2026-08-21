@@ -23,12 +23,12 @@ export default async function TagPage({ params }: { params: Promise<{ slug: stri
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm">
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Topic</p>
-        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-slate-950">#{tag.name}</h1>
+      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm dark:border-slate-800 dark:bg-slate-900 transition-colors">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Topic</p>
+        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white">#{tag.name}</h1>
         <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.length === 0 ? (
-            <p className="text-sm text-slate-500 italic">No published posts with this tag yet.</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 italic">No published posts with this tag yet.</p>
           ) : (
             posts.map((post) => (
               <PostCard key={post.id} post={post} />

@@ -23,13 +23,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm">
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Category</p>
-        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-slate-950">{category.name}</h1>
-        <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">{category.description}</p>
+      <div className="rounded-[40px] border border-slate-200/80 bg-white p-8 sm:p-12 shadow-sm dark:border-slate-800 dark:bg-slate-900 transition-colors">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Category</p>
+        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white">{category.name}</h1>
+        <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">{category.description}</p>
         <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.length === 0 ? (
-            <p className="text-sm text-slate-500 italic">No published posts in this category yet.</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 italic">No published posts in this category yet.</p>
           ) : (
             posts.map((post) => (
               <PostCard key={post.id} post={post} />

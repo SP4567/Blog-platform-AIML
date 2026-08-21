@@ -39,13 +39,13 @@ export default async function Home() {
           <div className="grid gap-4 md:grid-cols-2">
             {posts.slice(0, 4).map((post) => (
               <Link key={post.id} href={`/post/${post.slug}`} className="block">
-                <Card className="h-full flex flex-col justify-between hover:border-slate-300 transition">
+                <Card className="h-full flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 transition">
                   <div>
                     <CardHeader className="mb-2 space-y-1">
                       <CardTitle className="line-clamp-2 text-base">{post.title}</CardTitle>
                       <CardDescription>{post.author?.name ?? "Author"}</CardDescription>
                     </CardHeader>
-                    <p className="text-sm leading-6 text-slate-600 line-clamp-2">{post.excerpt}</p>
+                    <p className="text-sm leading-6 text-slate-600 dark:text-slate-400 line-clamp-2">{post.excerpt}</p>
                   </div>
                 </Card>
               </Link>

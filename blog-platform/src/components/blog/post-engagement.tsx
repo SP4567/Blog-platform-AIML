@@ -106,16 +106,18 @@ export function PostEngagement({
   };
 
   return (
-    <div className="flex items-center gap-3 py-4 border-y border-slate-100 my-8">
+    <div className="flex items-center gap-3 py-4 border-y border-slate-100 dark:border-slate-800 my-8">
       <Button
         variant="outline"
         size="sm"
         onClick={handleLike}
         className={`rounded-full gap-2 transition ${
-          isLiked ? "border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100" : "text-slate-700"
+          isLiked
+            ? "border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100 dark:border-rose-900 dark:bg-rose-950/60 dark:text-rose-400 dark:hover:bg-rose-900/60"
+            : "text-slate-700 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
         }`}
       >
-        <Heart className={`h-4 w-4 ${isLiked ? "fill-rose-600 text-rose-600" : ""}`} />
+        <Heart className={`h-4 w-4 ${isLiked ? "fill-rose-600 text-rose-600 dark:fill-rose-400 dark:text-rose-400" : ""}`} />
         <span>{likes}</span>
       </Button>
 
@@ -124,10 +126,12 @@ export function PostEngagement({
         size="sm"
         onClick={handleBookmark}
         className={`rounded-full gap-2 transition ${
-          isBookmarked ? "border-amber-200 bg-amber-50 text-amber-600 hover:bg-amber-100" : "text-slate-700"
+          isBookmarked
+            ? "border-amber-200 bg-amber-50 text-amber-600 hover:bg-amber-100 dark:border-amber-900 dark:bg-amber-950/60 dark:text-amber-400 dark:hover:bg-amber-900/60"
+            : "text-slate-700 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
         }`}
       >
-        <Bookmark className={`h-4 w-4 ${isBookmarked ? "fill-amber-600 text-amber-600" : ""}`} />
+        <Bookmark className={`h-4 w-4 ${isBookmarked ? "fill-amber-600 text-amber-600 dark:fill-amber-400 dark:text-amber-400" : ""}`} />
         <span>{isBookmarked ? "Saved" : "Save"}</span>
       </Button>
 
@@ -135,9 +139,9 @@ export function PostEngagement({
         variant="outline"
         size="sm"
         onClick={handleShare}
-        className="rounded-full gap-2 text-slate-700 ml-auto"
+        className="rounded-full gap-2 text-slate-700 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 ml-auto"
       >
-        {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="h-4 w-4" />}
         <span>{copied ? "Link Copied" : "Share"}</span>
       </Button>
     </div>
