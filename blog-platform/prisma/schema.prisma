@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -13,7 +13,7 @@ model User {
   name                 String?
   role                 String      @default("author") // "visitor", "registered_user", "author", "editor", "moderator", "administrator", "super_admin"
   image                String?
-  bio                  String?
+  bio                  String?     @db.Text
   location             String?
   website              String?
   passwordHash         String?
@@ -41,8 +41,8 @@ model Post {
   id           String     @id @default(cuid())
   slug         String     @unique
   title        String
-  excerpt      String
-  content      String
+  excerpt      String     @db.Text
+  content      String     @db.Text
   status       String     @default("published") // "draft", "published", "scheduled"
   publishedAt  DateTime   @default(now())
   createdAt    DateTime   @default(now())
@@ -71,7 +71,7 @@ model Category {
   id          String @id @default(cuid())
   slug        String @unique
   name        String
-  description String
+  description String @db.Text
   color       String @default("from-cyan-500 to-sky-600")
   posts       Post[]
 }
@@ -85,7 +85,7 @@ model Tag {
 
 model Comment {
   id        String   @id @default(cuid())
-  body      String
+  body      String   @db.Text
   createdAt DateTime @default(now())
   authorId  String
   postId    String
@@ -125,6 +125,6 @@ model ContactMessage {
   id        String   @id @default(cuid())
   name      String
   email     String
-  message   String
+  message   String   @db.Text
   createdAt DateTime @default(now())
 }
