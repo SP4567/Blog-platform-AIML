@@ -33,10 +33,16 @@ export function HeroSection({ featured = [] }: { featured?: Post[] }) {
           </div>
         </div>
         <div className="rounded-[32px] border border-slate-200/80 bg-white/70 p-6 shadow-2xl shadow-slate-200/70 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-indigo-950/20">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Featured now</p>
-            <ArrowRight className="h-4 w-4 text-slate-400" />
-          </div>
+          <Link
+            href="/search"
+            className="group flex items-center justify-between transition-colors"
+            aria-label="Explore featured stories"
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500 group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-white transition-colors">
+              Featured now
+            </p>
+            <ArrowRight className="h-4 w-4 text-slate-400 transition-all duration-200 group-hover:translate-x-1 group-hover:text-slate-900 dark:group-hover:text-white" />
+          </Link>
           <div className="mt-4 space-y-4">
             {displayPosts.slice(0, 2).map((post) => (
               <Link
