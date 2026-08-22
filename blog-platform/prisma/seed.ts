@@ -35,6 +35,20 @@ async function main() {
     },
   });
 
+  await prisma.user.create({
+    data: {
+      email: "suyashpandey668@gmail.com",
+      name: "Suyash Pandey",
+      role: "administrator",
+      bio: "Platform Admin, Software Engineer",
+      location: "India",
+      website: "https://theperceptron.dev",
+      image: "/avatars/suyash.jpeg",
+      passwordHash: adminPasswordHash,
+      emailVerified: true,
+    },
+  }).catch(() => {});
+
   const mina = await prisma.user.create({
     data: {
       email: "mina@northstar-journal.dev",
